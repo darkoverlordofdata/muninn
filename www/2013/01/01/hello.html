@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Wine Cellar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="//cdn.darkoverlordofdata.com/css/bootstrap-arimo.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+    <link href="//cdn.darkoverlordofdata.com/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://use.edgefonts.net/andika.js"></script>
+    <script src="http://use.edgefonts.net/arvo.js"></script>
+
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script>
+
+        var socket = io.connect();
+        socket.on('connect', function () {
+            socket.send(window.location.href);
+        });
+        window.onhashchange = function () {
+            socket.send(window.location.href);
+        }
+    </script>
+
+</head>
+
+<body>
+
+<div class="row-fluid">
+    <div class="span12">
+        <h1>Huginn</h1>
+        <p class="muted">1 January 2013</p>
+        <p>
+    pronounced "HOO-gin"
+</p>
+<p>
+    Huginn is a static page generator.
+</p>
+<p>
+  "On, Hekyll! On, Jekyll! On Huginn and Muninn!"
+</p>
+    </div>
+</div>
+<hr />
+<p class="pagination-centered">
+    <small class="muted">
+        <a class="no-link" href="/">
+            Copyright Dark Overlord of Data 2012 - 2013</a>
+    </small>
+<p class="pagination-centered">
+    <a href="https://github.com/darkoverlordofdata/katra">
+        <i class="icon icon-octocat"></i></a>
+</p>
