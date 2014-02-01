@@ -15,10 +15,11 @@
 #
 muninn = require('muninn')
 
-module.exports = class Wines extends muninn.core.Controller
+class Wines extends muninn.core.Controller
 
   constructor: ->
-    @model 'wines'
+    super
+    @load.model 'wines'
 
 
   routes: ->
@@ -78,3 +79,6 @@ module.exports = class Wines extends muninn.core.Controller
           console.log "" + result + " document(s) deleted"
           res.send req.body
 
+
+
+module.exports = Wines

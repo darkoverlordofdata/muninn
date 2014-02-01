@@ -21,4 +21,4 @@ module.exports =
   #| These are the classes located in the app/lib folder.
   #|
   #
-  libraries: ['SocketIO']
+  libraries: []
