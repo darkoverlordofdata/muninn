@@ -16,6 +16,15 @@ module.exports =
 
   #
   #| -------------------------------------------------------------------
+  #|  Auto-load core components
+  #| -------------------------------------------------------------------
+  #| These are the classes located in the core/ folder.
+  #|
+  #
+  core: ['SocketIO']
+
+  #
+  #| -------------------------------------------------------------------
   #|  Auto-load Libraries
   #| -------------------------------------------------------------------
   #| These are the classes located in the app/lib folder.

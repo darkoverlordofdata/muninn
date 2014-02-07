@@ -15,7 +15,6 @@
 #
 muninn = require('muninn')
 
-
 class Wines extends muninn.core.Controller
 
   #
@@ -44,7 +43,7 @@ class Wines extends muninn.core.Controller
   # Find by Id
   #
   findById: (id) ->
-    console.log "Retrieving wine: " + id
+    muninn.logMessage 'debug',  "Get wine: " + id
     @wines.collection (err, collection) =>
       collection.findOne _id: @wines.id(id), (err, item) =>
         @res.send item
@@ -54,13 +53,13 @@ class Wines extends muninn.core.Controller
   #
   addWine: () ->
     wine = req.body
-    console.log "Adding wine: " + JSON.stringify(wine)
+    muninn.logMessage 'debug',  "Add wine: " + JSON.stringify(wine)
     @wines.collection (err, collection) =>
       collection.insert wine, safe: true, (err, result) =>
         if err
           res.send error: "An error has occurred"
         else
-          console.log "Success: " + JSON.stringify(result[0])
+          muninn.logMessage 'debug',  "Success: " + JSON.stringify(result[0])
           @res.send result[0]
 
   #
@@ -70,28 +69,28 @@ class Wines extends muninn.core.Controller
     wine = @req.body
     delete wine._id
 
-    console.log "Updating wine: " + id
-    console.log JSON.stringify(wine)
+    muninn.logMessage 'debug',  "Update wine: " + id
+    muninn.logMessage 'debug',  JSON.stringify(wine)
     @wines.collection (err, collection) =>
       collection.update _id: @wines.id(id), wine, safe: true, (err, result) =>
         if err
-          console.log "Error updating wine: " + err
+          muninn.logMessage 'debug',  "Error updating wine: " + err
           @res.send error: "An error has occurred"
         else
-          console.log "" + result + " document(s) updated"
+          muninn.logMessage 'debug',  "" + result + " document(s) updated"
           @res.send wine
 
   #
   # Delete a Wine
   #
   deleteWine: (id) ->
-    console.log "Deleting wine: " + id
+    muninn.logMessage 'debug',  "Delete wine: " + id
     @wines.collection (err, collection) =>
       collection.remove _id: @wines.id(id), safe: true, (err, result) =>
         if err
           @res.send error: "An error has occurred - " + err
         else
-          console.log "" + result + " document(s) deleted"
+          muninn.logMessage 'debug',  "" + result + " document(s) deleted"
           @res.send @req.body
 
 

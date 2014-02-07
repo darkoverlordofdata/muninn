@@ -14,6 +14,7 @@
 # Wines controller
 #
 
+muninn = require('muninn')
 config  = require('../config').database.mongo
 
 module.exports = class WinesModel
@@ -27,7 +28,7 @@ module.exports = class WinesModel
 
   db.open (err, db) ->
     unless err
-      console.log "Connected to 'winedb' database"
+      muninn.logMessage 'debug', "Connected to 'winedb' database"
       db.collection "wines", safe: true, (err, collection) ->
         if err
           console.log "The 'wines' collection doesn't exist. Creating it with sample data..."
