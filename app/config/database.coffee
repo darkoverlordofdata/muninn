@@ -6,7 +6,10 @@
 
 module.exports =
 
-  mongo:
+  'connect-mongo':
+    db: 'muninn'
+
+  'mongo':
     driver: 'mongodb'
     host: 'localhost'
     port: 27017

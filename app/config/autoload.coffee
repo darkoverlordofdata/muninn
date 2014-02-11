@@ -7,27 +7,55 @@ module.exports =
 
   #
   #| -------------------------------------------------------------------
-  #|  Auto-load controllers
+  #|  Auto-load core plugins
   #| -------------------------------------------------------------------
-  #| These are the classes located in the app/controllers folder.
+  #| folders to add
   #|
   #
-  controllers: ['wines']
+  plugins: []
 
   #
   #| -------------------------------------------------------------------
-  #|  Auto-load core components
+  #|  Auto-load core server components
   #| -------------------------------------------------------------------
   #| These are the classes located in the core/ folder.
   #|
   #
-  core: ['SocketIO']
+  core: ['SocketIO', 'Sessions']
 
   #
   #| -------------------------------------------------------------------
-  #|  Auto-load Libraries
+  #|  Auto-load library classes
   #| -------------------------------------------------------------------
-  #| These are the classes located in the app/lib folder.
+  #| These are the classes located in the lib/ folder.
   #|
   #
-  libraries: []
+  libraries: ['Session']
+
+  #
+  #| -------------------------------------------------------------------
+  #|  Auto-load Helpers
+  #| -------------------------------------------------------------------
+  #| These are the mixins located in the helpers/ folder.
+  #|
+  #
+  helpers: []
+
+  #
+  #| -------------------------------------------------------------------
+  #|  Auto-load Models
+  #| -------------------------------------------------------------------
+  #| These are the models located in the models/ folder.
+  #|
+  #
+  models: []
+
+  #
+  #| -------------------------------------------------------------------
+  #|  Auto-load controllers
+  #| -------------------------------------------------------------------
+  #| These are the classes located in the controllers/ folder.
+  #|
+  #
+  controllers: ['wines']
+

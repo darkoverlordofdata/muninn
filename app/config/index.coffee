@@ -187,6 +187,12 @@ module.exports =
   #| Session Variables
   #|--------------------------------------------------------------------------
   #|
+  #| 'sess_driver'            = session middleware:
+  #|                               connect-mongo
+  #|                               connect-mysql
+  #|                               connect-pg
+  #|                               connect-redis
+  #|
   #| 'sess_cookie_name'		    = cookie name
   #| 'sess_expiration'			  = seconds the session will last.
   #|                            by default sessions last 7200 seconds (two hours).
@@ -200,7 +206,7 @@ module.exports =
   #| 'sess_match_useragent'	  = true/false Match the User Agent when reading the session data?
   #| 'sess_time_to_update'		= Seconds between refresh of session data
   #|
-  sess_driver: 'sql'
+  sess_driver: 'connect-mongo'
   sess_cookie_name: 'sid'
   sess_expiration: 7200*60
   sess_expire_on_close: false
