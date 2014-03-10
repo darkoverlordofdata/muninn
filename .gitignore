@@ -1,13 +1,2 @@
 /.idea
-/node_modules/.bin
-/node_modules/dispatch
-/node_modules/express
-/node_modules/exspresso
-/node_modules/huginn
-/node_modules/inflect
-/node_modules/moment
-/node_modules/mongodb
-/node_modules/pg
-/node_modules/socket.io
-/node_modules/sqlite3
-/tmp
+

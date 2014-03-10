@@ -1,7 +1,5 @@
 # Muninn
 
-App Server paired to Huginn
-
 The problem - Exspresso core is bloated -
     Redundancies with connect.js
     new controller object for each request

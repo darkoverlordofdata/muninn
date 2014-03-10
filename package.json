@@ -3,20 +3,11 @@
   "description": "Muninn application server",
   "author": "bruce davidson",
   "dependencies": {
-    "huginn": "0.1.x",
-    "mongodb": "~1.3.23",
-    "socket.io": "~0.9.16",
     "express": "~3.4.8",
-    "inflect": "~0.3.0",
-    "exspresso": "~0.10.27",
     "moment": "~2.5.1",
     "dispatch": "~0.2.0",
-    "cookie": "~0.1.0",
-    "cookie-signature": "~1.0.3",
-    "async": "~0.2.10",
-    "ect": "~0.5.6",
-    "marked": "~0.3.1",
-    "connect-mongo": "~0.4.0"
+    "facebook-node-sdk": "~0.2.0",
+    "ect": "~0.5.6"
   },
   "devDependencies": {},
   "node": "0.10.x"

@@ -21,11 +21,20 @@ module.exports =
   #| These are the classes located in the core/ folder.
   #|
   #
-  core: ['SocketIO', 'Sessions']
+  core: []
 
   #
   #| -------------------------------------------------------------------
-  #|  Auto-load library classes
+  #|  Auto-load core server components
+  #| -------------------------------------------------------------------
+  #|
+  #|
+  #
+  database: []
+
+  #
+  #| -------------------------------------------------------------------
+  #|  Auto-load library classes for eaxh controller
   #| -------------------------------------------------------------------
   #| These are the classes located in the lib/ folder.
   #|
@@ -57,5 +66,9 @@ module.exports =
   #| These are the classes located in the controllers/ folder.
   #|
   #
-  controllers: ['wines']
+  controllers: [
+    'welcome'
+    'users'
+    'demo'
+  ]
 
