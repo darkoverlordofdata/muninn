@@ -10,14 +10,13 @@
 #  it under the terms of the MIT License
 #
 #+--------------------------------------------------------------------+
+
+muninn  = require('../muninn')
 #
 # Server Error Class
 #
 #   This class is used to raise a Server Error 5xx
 #
-fs = require('fs')
-path = require('path')
-muninn  = require('../muninn')
 
 class muninn.core.ServerError extends Error
 
@@ -171,13 +170,15 @@ class muninn.core.Exceptions
 
   constructor: ->
     muninn.logMessage 'debug', "Exceptions Class Initialized"
-    Ect = require('ect')
+    ect = require('ect')
+    fs = require('fs')
+    path = require('path')
     $root =
       layout  : String(fs.readFileSync(path.join(muninn.SYSPATH, '/errors/layout.ect')))
       '5xx'   : String(fs.readFileSync(path.join(muninn.SYSPATH, '/errors/5xx.ect')))
       '404'   : String(fs.readFileSync(path.join(muninn.SYSPATH, '/errors/404.ect')))
 
-    @ect = new Ect(root: $root, ext: '.ect')
+    @ect = new ect(root: $root, ext: '.ect')
 
   #
   # Exception Logger
@@ -310,7 +311,7 @@ class muninn.core.Exceptions
 
         $error = new muninn.core.ServerError($err)
 
-        $str = @ect.render($template, site_name: muninn.getConfig('site_name'), err: $error)
+        $str = @ect.render($template, site_name: muninn.config.site_name, err: $error)
         $res.writeHead 200,
           'Content-Length'  : $str.length
           'Content-Type'    : 'text/html; charset=utf-8'
@@ -403,4 +404,3 @@ getStatusText = ($code = 200, $text = '') ->
   $text = $stat[$code] if $stat[$code]?  and $text is ''
   $text
     
-module.exports = muninn.core.Exceptions

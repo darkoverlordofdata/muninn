@@ -10,17 +10,17 @@
 #| it under the terms of the MIT License
 #|
 #+--------------------------------------------------------------------+
+
+muninn = require('../muninn')
 #
 # Logger class
 #
-
-fs = require('fs')
-path = require('path')
-moment = require('moment')
-muninn = require('../muninn')
-
-
 class muninn.core.Log
+
+
+  fs = require('fs')
+  path = require('path')
+  moment = require('moment')
 
   _enabled        : true                # Use logging?
   _log_path       : ''                  # Path to the log file
@@ -31,15 +31,16 @@ class muninn.core.Log
     DEBUG         : 2                   #   log errors and debug entries
     INFO          : 3                   #   log everything
 
+  isDir = ($path) -> fs.existsSync($path) and fs.statSync($path).isDirectory()
   #
   # Load configuration
   #
   constructor: () ->
 
-    $config = muninn.getConfig()
+    $config = muninn.config
 
     @_log_path  = $config.log_path or path.join(muninn.APPPATH, 'logs/')
-    @_enabled   = false if not muninn.isDir(@_log_path) #or not is_really_writable(@_log_path)
+    @_enabled   = false if not isDir(@_log_path) #or not is_really_writable(@_log_path)
     @_threshold = parseInt($config.log_threshold, 10)
     @_date_fmt  = $config.log_date_format if $config.log_date_format isnt ''
 

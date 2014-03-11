@@ -26,17 +26,6 @@ module.exports =
   port:   process.env.OPENSHIFT_NODEJS_PORT or 0xd16a
 
   #|--------------------------------------------------------------------------
-  #|  Logger option
-  #|--------------------------------------------------------------------------
-  #|
-  #| default  Verbose output
-  #| short    Consise output
-  #| tiny     Terse output
-  #| dev      Colorized version of tiny
-  #|
-  logger: 'dev'
-
-  #|--------------------------------------------------------------------------
   #| views
   #|--------------------------------------------------------------------------
   #|
@@ -91,6 +80,29 @@ module.exports =
   #|
   #|
   encryption_key: process.env.CLIENT_SECRET ? 'ZAHvYIu8u1iRS6Hox7jADpnCMYKf57ex0BEWc8bM0/4='
+
+  #|
+  #|--------------------------------------------------------------------------
+  #| Logging
+  #|--------------------------------------------------------------------------
+  #|
+  #| Logging Options
+  #|
+  #|
+  log_path: ''
+  log_date_format: 'YYYY-MM-DD HH:mm:ss'
+  log_threshold: 3
+  #|	               0        Disables logging, Error logging TURNED OFF
+  #|	               1        Error Messages (including PHP errors)
+  #|	               2        Debug Messages
+  #|	               3        All Messages
+  #|
+  logger: 'tiny'
+  #|                 default  Verbose output
+  #|                 short    Consise output
+  #|                 tiny     Terse output
+  #|                 dev      Colorized version of tiny
+  #|
 
   #|--------------------------------------------------------------------------
   #| Autoload
