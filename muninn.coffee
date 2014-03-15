@@ -13,15 +13,13 @@
 #
 # muninn framework
 #
-#
-# System conponents
-#
-fs        = require("fs")                 # File system
-os        = require('os')                 # operating-system related utility functions
-path      = require('path')               # path utils
-format    = require('util').format
 
 class muninn
+
+  fs        = require("fs")                 # File system
+  os        = require('os')                 # operating-system related utility functions
+  path      = require('path')               # path utils
+  format    = require('util').format
 
   _log = null
   _err = null
@@ -40,11 +38,6 @@ class muninn
   # set the environment
   #
   @ENVIRONMENT = process.env.ENVIRONMENT ? process.env.NODE_ENV ? 'development'
-
-  #
-  #  The coffee-script file extension
-  #
-  @EXT = '.coffee'
 
   #
   #  Path to the system folder
@@ -81,6 +74,13 @@ class muninn
     muninn.DOCPATH = path.join($root, $www, '/')
     muninn.MODPATH = if $mod is '' then '' else path.join($root, $mod, '/')
     muninn.config = require(path.join(muninn.APPPATH, 'config'))
+
+  #
+  # Start the server
+  #
+  @start = ($middleware...) ->
+    server = new muninn.core.Server(muninn.config)
+    server.start $middleware
 
   #
   # Set Routes
@@ -147,11 +147,6 @@ class muninn
     return true if muninn.config.log_threshold is 0
     muninn.log.write $level, format.apply(undefined, $args)
 
-
-  @start = ->
-    
-    server = new muninn.core.Server(muninn.config)
-    server.start()
 
 
 

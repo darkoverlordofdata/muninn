@@ -39,7 +39,7 @@ module.exports =
   #| These are the classes located in the lib/ folder.
   #|
   #
-  libraries: ['Session']
+  libraries: []
 
   #
   #| -------------------------------------------------------------------
@@ -66,9 +66,5 @@ module.exports =
   #| These are the classes located in the controllers/ folder.
   #|
   #
-  controllers: [
-    'welcome'
-    'users'
-    'demo'
-  ]
+  controllers: []
 

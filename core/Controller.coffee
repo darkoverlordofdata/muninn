@@ -17,5 +17,5 @@ muninn = require('../muninn')
 
 class muninn.core.Controller
 
-  constructor: (@req, @res) ->
+  constructor: (@req, @res, @next) ->
 

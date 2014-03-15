@@ -27,9 +27,9 @@ class muninn.core.Server
   os        = require('os')                 # operating-system related utility functions
   path      = require('path')               # path utils
   ect       = require('ect')                # CoffeeScript template engine
-  Facebook  = require("facebook-node-sdk")  # Node.js SDK for the Facebook API
 
   protocol = ($secure) -> if $secure then 'https' else 'http'
+  ucfirst = ($str) -> $str.charAt(0).toUpperCase() + $str.substr(1)
 
   #
   # @property [String] http driver: connect
@@ -46,7 +46,7 @@ class muninn.core.Server
   #
   # @property [String] driver version
   #
-  version: ''
+  version: '0.0.1'
 
   #
   # inner class Vars
@@ -71,13 +71,13 @@ class muninn.core.Server
   #
   constructor: (@config, $driver = 'express') ->
 
-    muninn.logMessage 'debug', "%s Driver Initialized", @driver
+    muninn.logMessage 'debug', "%s Driver Initialized", ucfirst(@driver)
 
     @driver = require($driver)
-    $version = $driver+' v'+@driver.version
+    $version = ucfirst($driver)+' v'+@version
     @version = $version
 
-  start: ->
+  start: ($middleware) ->
     @app = @driver()
     #
     # properties
@@ -102,17 +102,38 @@ class muninn.core.Server
     @app.use @driver.methodOverride()
     @app.use @driver.bodyParser()
     @app.use @driver.cookieParser()
-    @app.use @driver.session(secret: @config.encryption_key)
+    @app.use @driver.cookieSession(secret: @config.encryption_key)
 
-    @app.use Facebook.middleware
-      appId: @config.fb.appId
-      secret: @config.fb.secret
 
     #
     # development only
     #
     if 'development' is @app.get('env')
       @app.use @driver.errorHandler()
+
+    @app.use ($req, $res, $next) =>
+
+      #
+      # Represent
+      #
+      $res.setHeader 'X-Powered-By', "Muninn/#{@version}"
+      #
+      # get the base url?
+      #
+      if (muninn.config.base_url or '') is ''
+        muninn.config.base_url = protocol($req.connection.encrypted)+'://'+ $req.headers['host']
+
+      $next()
+
+    #
+    # Custom middleware?
+    #
+    if $middleware?
+      if Array.isArray($middleware)
+        for m in $middleware
+          @app.use m
+      else
+        @app.use $middleware
 
     @app.use muninn.err.exceptionHandler()
     #
@@ -123,119 +144,11 @@ class muninn.core.Server
     @app.use ($req, $res, $next) -> muninn.show404 $req.originalUrl
 
     #
-    # Start up
+    # Careful with that axe, Eugene
     #
     @app.listen @config.port, @config.ip, =>
 
       console.log "listening on port http://%s:%d", @config.ip, @config.port
-
-
-    @app.use ($req, $res, $next) =>
-
-      #
-      # Represent
-      #
-      $res.setHeader 'X-Powered-By', "Muninn/#{@controller.version}"
-      #
-      # get the base url?
-      #
-      if @config.base_url or '' is ''
-        @config.base_url = protocol($req.connection.encrypted)+'://'+ $req.headers['host']
-
-      #
-      # Send JSON
-      #
-      # Send object as JSON
-      #
-      # @private
-      # @param [Object] data  hash of variables to render with template
-      # @return [Void]
-      #
-      $res.json = ($data = {}) ->
-        $res.writeHead 200,
-          'Content-Type'    : 'application/json; charset=utf-8'
-        $res.end JSON.stringify($data)
-        return
-
-      #
-      # Redirect
-      #
-      # Redirect to another url
-      #
-      # @private
-      # @param [String] url url to redirect to
-      # @param [String] type  location | refresh
-      # @param [String] url url to redirect to
-      # @return [Void]
-      #
-      $res.redirect = ($url, $type='location', $status = 302) ->
-
-        switch $type
-          when 'refresh'
-            $res.writeHead $status,
-              Refresh: 0
-              url: $url
-            $res.end null
-          else
-            $res.writeHead $status,
-              Location: $url
-            $res.end null
-
-
-
-      #
-      # Render the view
-      #
-      # Create a new Variable instance to merge the $data param
-      # with the flashdata, as well as the config values and
-      # helpers that have been added to the prototype
-      #
-      # @private
-      # @param [String] view  path to view template
-      # @param [Object] data  hash of variables to render with template
-      # @param [Funcion] next optional async callback
-      # @return [Void]
-      #
-      $res.render = ($view, $data = {}, $next) ->
-        if typeof $data is 'function' then [$data, $next] = [{}, $data]
-
-        # if it's not a filename, then directly render partial
-        if Array.isArray($view)
-
-          $html = $render.eco($view.join(''), new Vars($data))
-          return $next(null, $html)
-
-        if not fs.existsSync($view)
-          return show_error('Unable to load the requested file: %s', $view)
-        #
-        # Default terminal next
-        #
-        $next = $next ? ($err, $str) ->
-          return $next($err) if $err
-          $res.writeHead 200,
-            'Content-Length'  : $str.length
-            'Content-Type'    : 'text/html; charset=utf-8'
-          $res.end $str
-          return
-
-        #
-        # Read in the view file
-        #
-        fs.readFile $view, 'utf8', ($err, $str) ->
-          return $next($err) if $err
-          $ext = path.extname($view).replace('.','')
-
-          if $render[$ext]?
-
-            try
-              $next(null, $render[$ext]($str, new Vars($data, filename: $view, flashdata: $res.flashdata)))
-
-            catch $err
-              show_error $err
-
-          else show_error 'Invalid view file type: %s (%s)', $ext, $view
-
-      $next()
 
 
 

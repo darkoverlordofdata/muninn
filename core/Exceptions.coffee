@@ -305,20 +305,16 @@ class muninn.core.Exceptions
     #
     @show5xx = ($err, $template = '5xx', $status_code = 500, $next) =>
 
-      if $status_code is 404
-        if typeof $template is 'function'
-          [$template, $status_code, $next] = ['5xx', 500, $template]
+      if typeof $template is 'function'
+        [$template, $status_code, $next] = ['5xx', 500, $template]
 
-        $error = new muninn.core.ServerError($err)
+      $error = new muninn.core.ServerError($err)
 
-        $str = @ect.render($template, site_name: muninn.config.site_name, err: $error)
-        $res.writeHead 200,
-          'Content-Length'  : $str.length
-          'Content-Type'    : 'text/html; charset=utf-8'
-        $res.end $str
-      else
-        muninn.logMessage 'error', $err
-
+      $str = @ect.render($template, site_name: muninn.config.site_name, err: $error)
+      $res.writeHead 200,
+        'Content-Length'  : $str.length
+        'Content-Type'    : 'text/html; charset=utf-8'
+      $res.end $str
       return true
 
 
