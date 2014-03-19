@@ -1,17 +1,14 @@
 # Muninn
 
-The problem - Exspresso core is bloated -
-    Redundancies with connect.js
-    new controller object for each request
+Server side CoffeeScript MVC
 
-The solution - Huginn and Muninn
+Goals:
 
-Huginn pre-processes as much static content as possible.
-Muninn serves the static and dynamic content, as well as
-a backend Api using REST and Sockets
-
-Use the HMVC class loader and folder structure of Exspresso
-to present multiple dynamically generated single page apps.
+* Lightweight
+* Works standalone or as a plugin for Huginn
+* MVC structured code
+* Highly configurable
+* Favors configuration over convention
 
 
 # MIT License
