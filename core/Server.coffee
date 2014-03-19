@@ -94,8 +94,10 @@ class muninn.core.Server
     #
     # middleware
     #
+
+    console.log 'FAV '+path.join(@config.www, @config.favicon)
     @app.use @driver.static(@config.www)
-    @app.use @driver.favicon()
+    @app.use @driver.favicon(path.join(@config.www, @config.favicon))
     @app.use @driver.logger(@config.logger)
     @app.use @driver.json()
     @app.use @driver.urlencoded()
