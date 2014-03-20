@@ -2,7 +2,7 @@
 
 Server side CoffeeScript MVC
 
-Goals:
+### Goals:
 
 * Lightweight
 * Works standalone or as a plugin for Huginn
@@ -10,7 +10,15 @@ Goals:
 * Highly configurable
 * Favors configuration over convention
 
-Usage:
+### Install:
+
+```bash
+npm install muninn
+```
+
+
+
+### Usage:
 
 ```coffeescript
 muninn = require("muninn")
