@@ -10,6 +10,13 @@ Goals:
 * Highly configurable
 * Favors configuration over convention
 
+Usage:
+
+```coffeescript
+muninn = require("muninn")
+muninn.init __dirname
+muninn.start()
+```
 
 # MIT License
 
