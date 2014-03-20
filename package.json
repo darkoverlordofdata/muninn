@@ -1,29 +1,32 @@
 {
-    "name": "muninn",
-    "version": "0.0.1",
-    "description": "Muninn application server",
-    "author": "bruce davidson <brucedavidson@darkoverlordofdata.com>",
-    "keywords": [
-        "muninn",
-        "coffee-script"
-    ],
-    "contributors": [
-        {
-            "name": "bruce davidson",
-            "email": "brucedavidson@darkoverlordofdata.com"
-        }
-    ],
-    "dependencies": {
-        "express": "~3.4.8",
-        "moment": "~2.5.1",
-        "dispatch": "~0.2.0",
-        "ect": "~0.5.6"
-    },
-    "devDependencies": {},
-    "main": "index",
-    "engines": {
-        "node": ">=0.10.x",
-        "npm": ">=1.x.x"
-    },
-    "license": "MIT"
+  "name": "muninn",
+  "version": "0.0.2",
+  "description": "Muninn application server",
+  "author": {
+    "name": "bruce davidson",
+    "email": "brucedavidson@darkoverlordofdata.com"
+  },
+  "keywords": [
+    "muninn",
+    "coffee-script"
+  ],
+  "contributors": [
+    {
+      "name": "bruce davidson",
+      "email": "brucedavidson@darkoverlordofdata.com"
+    }
+  ],
+  "dependencies": {
+    "express": "~3.4.8",
+    "moment": "~2.5.1",
+    "dispatch": "~0.2.0",
+    "ect": "~0.5.6"
+  },
+  "devDependencies": {},
+  "main": "index",
+  "engines": {
+    "node": ">=0.10.x",
+    "npm": ">=1.x.x"
+  },
+  "license": "MIT"
 }

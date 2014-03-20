@@ -148,9 +148,17 @@ class muninn.core.Server
     #
     # Careful with that axe, Eugene
     #
-    @app.listen @config.port, @config.ip, =>
+    if @config.ip?
 
-      console.log "listening on port http://%s:%d", @config.ip, @config.port
+      @app.listen @config.port, @config.ip, =>
+
+        console.log "listening on port http://%s:%d", @config.ip, @config.port
+
+    else
+
+      @app.listen @config.port, =>
+
+        console.log "listening on port http://localhost:%d", @config.port
 
 
 
